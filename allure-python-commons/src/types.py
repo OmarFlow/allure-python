@@ -64,7 +64,8 @@ class AttachmentType(Enum):
 
     PDF = ("application/pdf", "pdf")
 
-
+    PARQUET = ("application/parquet", "parquet")
+    
 class ParameterMode(Enum):
     HIDDEN = 'hidden'
     MASKED = 'masked'
