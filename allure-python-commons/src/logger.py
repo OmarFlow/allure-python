@@ -49,11 +49,14 @@ class AllureFileLogger:
     @hookimpl
     def report_attached_data(self, body, file_name):
         destination = os.path.join(self._report_dir, file_name)
-        with open(destination, 'wb') as attached_file:
-            if isinstance(body, str):
-                attached_file.write(body.encode('utf-8'))
-            else:
-                attached_file.write(body)
+        if destination.endswith("parquet"):
+            body.to_parquet(destination)
+        else:
+            with open(destination, 'wb') as attached_file:
+                if isinstance(body, str):
+                    attached_file.write(body.encode('utf-8'))
+                else:
+                    attached_file.write(body)
 
 
 class AllureMemoryLogger:
